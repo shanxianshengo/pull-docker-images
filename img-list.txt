@@ -1,1 +1,3 @@
-quay.io/openebs/admission-server:ci
+quay.io/fluentd_elasticsearch/elasticsearch:v7.4.2
+quay.io/fluentd_elasticsearch/fluentd:v3.0.1
+docker.elastic.co/kibana/kibana-oss:7.2.0
