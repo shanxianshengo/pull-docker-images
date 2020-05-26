@@ -1,3 +1,9 @@
-quay.io/fluentd_elasticsearch/elasticsearch:v7.4.2
-quay.io/fluentd_elasticsearch/fluentd:v3.0.1
-docker.elastic.co/kibana/kibana-oss:7.2.0
+quay.io/prometheus/alertmanager:v0.20.0
+quay.io/coreos/kube-state-metrics:v1.9.5
+quay.io/coreos/kube-rbac-proxy:v0.4.1
+quay.io/coreos/kube-rbac-proxy:v0.4.1
+quay.io/prometheus/node-exporter:v0.18.1
+quay.io/coreos/kube-rbac-proxy:v0.4.1
+quay.io/coreos/k8s-prometheus-adapter-amd64:v0.5.0
+quay.io/prometheus/prometheus:v2.15.2
+quay.io/coreos/prometheus-config-reloader:v0.38.1
