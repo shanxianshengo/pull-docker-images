@@ -29,8 +29,8 @@ before_script:
   - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY" -u "$ALI_USERNAME" --password-stdin
  
 script:
-  - echo "start pull retag push"
   - |
+    echo "start pull retag and push"
     images=$(cat images.txt)
     count=$(echo "$images" | wc -l)
     icount=1
