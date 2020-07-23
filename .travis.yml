@@ -48,3 +48,6 @@ script:
       docker push $ALI_REGISTRY/$image_name
       ((icount++))
     done
+
+after_script:
+  - docker images
