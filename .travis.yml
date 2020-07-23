@@ -1,3 +1,18 @@
+# This workflow will pull docker images from gcr.io quay.io and push it to dockerhub or aliyun registry.
+#
+# To configure this workflow:
+#
+# 1. Set up secrets in your workspace: 
+#    - DOCKER_HUB with dockerhub url
+#    - DOCKER_USERNAME
+#    - DOCKER_PASSWORD
+#    - ALI_REGISTRY with aliyun registry url
+#    - ALI_USERNAME
+#    - ALI_PASSWORD
+#
+# 2. Change the values for the DOCKER_PASSWORD, ALI_PASSWORD  environment variables in travis-ci.com:
+#    choose "more options-->settings-->Environment Variables"
+
 language: bash
 
 services:
@@ -14,17 +29,21 @@ before_script:
   - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY" -u "$ALI_USERNAME" --password-stdin
  
 script:
-  - echo "start pull and retag and push"
+  - echo "start pull retag push"
   - |
-    for image in $(cat img-list.txt)
+    images=$(cat images.txt)
+    count=$(echo "$images" | wc -l)
+    icount=1
+    for image in $images
     do
       image_name=${image##*/}
       docker pull $image
       docker tag $image $DOCKER_HUB/$image_name
       docker tag $image $ALI_REGISTRY/$image_name
 
-      # push到dockerhub
+      # push to dockerhub
       docker push $DOCKER_HUB/$image_name
-      # push到阿里云仓库
+      # push to aliyun registry
       docker push $ALI_REGISTRY/$image_name
+      ((icount++))
     done
