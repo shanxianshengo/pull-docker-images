@@ -14,15 +14,15 @@
 dist: bionic
 language: shell
 
+services:
+  - docker
+
 env:
   global:
     - DOCKER_HUB=willdockerhub
     - ALI_REGISTRY=registry.cn-shenzhen.aliyuncs.com/images_mirror
 
 before_script:
-  - docker ps
-  - docker info
-  - docker version
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY" -u "$ALI_USERNAME" --password-stdin
  
@@ -45,7 +45,6 @@ script:
       docker push $ALI_REGISTRY/$image_name
       ((icount++))
     done
-
 after_script:
   - docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY
   - docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKER_HUB
