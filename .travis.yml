@@ -2,17 +2,16 @@
 #
 # To configure this workflow:
 #
-# 1. Set up secrets in your workspace: 
-#    - DOCKER_HUB with dockerhub url
-#    - DOCKER_USERNAME
-#    - DOCKER_PASSWORD
-#    - ALI_REGISTRY with aliyun registry url
-#    - ALI_USERNAME
-#    - ALI_PASSWORD
+# 1. Set up follow variables as your own: 
+#    - DOCKER_HUB: dockerhub account name
+#    - DOCKER_USERNAME & DOCKER_PASSWORD
+#    - ALI_REGISTRY:  aliyun registry url with region
+#    - ALI_USERNAME & ALI_PASSWORD
 #
 # 2. Change the values for the DOCKER_PASSWORD, ALI_PASSWORD  environment variables in travis-ci.com:
 #    choose "more options-->settings-->Environment Variables"
 
+dist: bionic
 language: shell
 
 services:
