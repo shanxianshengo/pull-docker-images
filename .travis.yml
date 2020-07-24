@@ -40,7 +40,6 @@ script:
       docker pull $image
       docker tag $image $DOCKER_HUB/$image_name
       docker tag $image $ALI_REGISTRY/$image_name
-
       # push to dockerhub
       docker push $DOCKER_HUB/$image_name
       # push to aliyun registry
@@ -51,4 +50,3 @@ script:
 after_script:
   - docker images --format "{{.Repository}}: {{.Tag}}" | grep $ALI_REGISTRY
   - docker images --format "{{.Repository}}: {{.Tag}}" | grep $DOCKER_HUB
-
