@@ -11,11 +11,11 @@
 # 2. Change the values for the DOCKER_PASSWORD, ALI_PASSWORD  environment variables in travis-ci.com:
 #    choose "more options-->settings-->Environment Variables"
 
+
+os: linux
 dist: bionic
 language: shell
-
-services:
-  - docker
+services: docker
 
 env:
   global:
