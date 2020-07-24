@@ -48,5 +48,5 @@ script:
     done
 
 after_script:
-  - docker images --format "{{.Repository}}: {{.Tag}}" | grep $ALI_REGISTRY
-  - docker images --format "{{.Repository}}: {{.Tag}}" | grep $DOCKER_HUB
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKER_HUB
