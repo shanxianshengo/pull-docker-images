@@ -28,10 +28,9 @@ before_script:
 script:
   - |
     echo "start pull retag and push"
-    images=$(cat images.txt)
-    count=$(echo "$images" | wc -l)
+    count=$(cat images.txt | wc -l)
     icount=1
-    for image in $images
+    for image in `cat images.txt`
     do
       echo [$icount/$count]: $image
       image_name=${image##*/}
