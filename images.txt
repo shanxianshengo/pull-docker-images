@@ -1,1 +1,1 @@
-jenkinsci/blueocean
+jenkins/inbound-agent
