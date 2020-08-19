@@ -18,13 +18,13 @@ services: docker
 
 env:
   global:
-    - DOCKER_HUB=willdockerhub
-    - ALI_REGISTRY=registry.cn-shenzhen.aliyuncs.com
+    - DOCKERHUB_ACCOUNT=willdockerhub
+    - ALI_REGISTRY_URL=registry.cn-shenzhen.aliyuncs.com
     - ALI_REGISTRY_NAMESPACE=images_mirror
 
 before_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY" -u "$ALI_USERNAME" --password-stdin
+  - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY_URL" -u "$ALI_USERNAME" --password-stdin
  
 script:
   - |
@@ -36,17 +36,17 @@ script:
       echo [$icount/$count]: $image
       image_name=${image##*/}
       docker pull $image
-      docker tag $image $DOCKER_HUB/$image_name
-      docker tag $image $ALI_REGISTRY/$ALI_REGISTRY_NAMESPACE/$image_name
+      docker tag $image $DOCKERHUB_ACCOUNT/$image_name
+      docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
       
       # push to dockerhub
-      docker push $DOCKER_HUB/$image_name
+      docker push $DOCKERHUB_ACCOUNT/$image_name
       
       # push to aliyun registry
-      docker push $ALI_REGISTRY/$ALI_REGISTRY_NAMESPACE/$image_name
+      docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
       ((icount++))
     done
 
 after_script:
-  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY
-  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKER_HUB
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY_URL
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKERHUB_ACCOUNT
