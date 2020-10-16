@@ -1,4 +1,4 @@
-# This workflow will pull kolla ansible docker images from dockerhub, push it to aliyun container registry.
+# This workflow will run scripts pull_by_yourself.sh
 #
 # To configure this workflow:
 #
@@ -22,20 +22,22 @@ env:
   ALI_REGISTRY_NAMESPACE: images_mirror
 
 jobs:
-  get-kolla-images:
+  get-images:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Log into aliyun registry
+    # Login aliyun registry
     - name: Log into aliyun registry
-      run: |
-        echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login $ALIYUN_REGISTRY -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
-        echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
+      run: echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login $ALIYUN_REGISTRY -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
 
-    # get images list
+    # Login docker registry
+    - name: Log into aliyun registry
+      run: echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
+
+    # pull retag and push images
     - name: get images
       run: sh pull_by_yourself.sh
 
