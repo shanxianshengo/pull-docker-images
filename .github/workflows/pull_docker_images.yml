@@ -29,13 +29,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Login aliyun registry
-    - name: Log into aliyun registry
-      run: docker login $ALIYUN_REGISTRY -u $ALIYUN_USERNAME -p '${{ secrets.ALIYUN_PASSWORD }}'
-
-    # Login docker registry
-    - name: Log into aliyun registry
-      run: docker login -u $DOCKERHUB_USERNAME -p ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: get images
+      env:
+        ALIYUN_PASSWORD: ${{ secrets.ALIYUN_PASSWORD }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: |
+        docker login $ALIYUN_REGISTRY -u $ALIYUN_USERNAME -p "ALIYUN_PASSWORD"
+        docker login -u $DOCKERHUB_USERNAME -p "DOCKERHUB_PASSWORD"
 
     # pull retag and push images
     - name: get images
