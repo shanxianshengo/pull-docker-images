@@ -32,8 +32,8 @@ jobs:
     # Log into aliyun registry
     - name: Log into aliyun registry
       run: |
-	     echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login $ALIYUN_REGISTRY -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
-	     echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
+        echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login $ALIYUN_REGISTRY -u ${{ secrets.ALIYUN_USERNAME }} --password-stdin
+        echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
 
     # get images list
     - name: get images list
@@ -55,8 +55,8 @@ jobs:
           # push to aliyun registry
           docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
           ((icount++))
-        done	  
-		
+        done
+
     # pull and push images
     - name: list images
       run: |
