@@ -31,7 +31,11 @@ jobs:
 
     # Login aliyun registry
     - name: Log into aliyun registry
-      run: docker login $ALIYUN_REGISTRY -u $ALIYUN_USERNAME -p ${{ secrets.ALIYUN_PASSWORD }}
+      with:
+        super_secret: ${{ secrets.ALIYUN_PASSWORD }}
+      env:
+        super_secret: ${{ secrets.ALIYUN_PASSWORD }}
+      run: docker login $ALIYUN_REGISTRY -u $ALIYUN_USERNAME -p $super_secret
 
     # Login docker registry
     - name: Log into aliyun registry
