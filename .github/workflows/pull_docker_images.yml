@@ -35,7 +35,7 @@ jobs:
 
     # Login docker registry
     - name: Log into aliyun registry
-      run: echo "${{ secrets.DOCKERHUB_PASSWORD" | docker login -u $DOCKERHUB_USERNAME --password-stdin 
+      run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u $DOCKERHUB_USERNAME --password-stdin 
 
     # pull retag and push images
     - name: get images
