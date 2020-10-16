@@ -36,28 +36,9 @@ jobs:
         echo "${{ secrets.DOCKERHUB_USERNAME }}" | docker login -u ${{ secrets.DOCKERHUB_PASSWORD }} --password-stdin 
 
     # get images list
-    - name: get images list
-      run: |
-        echo "start pull retag and push"
-        count=$(cat images.txt | wc -l)
-        icount=1
-        for image in `cat images.txt`
-        do
-          echo [$icount/$count]: $image
-          image_name=${image##*/}
-          docker pull $image
-          docker tag $image $DOCKERHUB_USERNAME/$image_name
-          docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
-          
-          # push to dockerhub
-          docker push $DOCKERHUB_USERNAME/$image_name
-          
-          # push to aliyun registry
-          docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
-          ((icount++))
-        done
+    - name: get images
+      run: sh pull_by_yourself.sh
 
-    # pull and push images
     - name: list images
       run: |
         docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY_URL
