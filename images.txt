@@ -1,3 +1,1 @@
-k8s.gcr.io/ingress-nginx/controller:v0.40.2
-gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.17.1
-gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook:v0.17.1
+gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard
