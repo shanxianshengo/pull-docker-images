@@ -40,5 +40,5 @@ jobs:
 
     - name: list images
       run: |
-        docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALIYUN_REGISTRY_URL
-        docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKERHUB_USERNAME
+        docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALIYUN_REGISTRY_URL || true
+        docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKERHUB_USERNAME || true
