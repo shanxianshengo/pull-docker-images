@@ -1,1 +1,1 @@
-gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard
+quay.io/kiali/kiali:v1.22
