@@ -2,7 +2,7 @@
 
 - Pull images from dockerhub or other registry then retag push to youself dockerhub or aliyun registry
 
-[![Build Status](https://travis-ci.com/willzhang/pull-docker-images.svg?branch=master)](https://travis-ci.org/wise2c-devops/breeze)
+[![Build Status](https://travis-ci.com/willzhang/pull-docker-images.svg?branch=master)](https://travis-ci.com/willzhang/pull-docker-images)
 
 use travis-ci pull docker images from google gcr.io or coreos quay.io to dockerhub or aliyun-registry
 
