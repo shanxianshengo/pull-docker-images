@@ -1,7 +1,31 @@
 base_repo=registry.cn-shenzhen.aliyuncs.com/images_mirror
 
-docker pull gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard@sha256:e72593477e8cb09b718b9b0b38731de5b4cb7ef0c04712f7b97f51be5c5e06c7
+pipeline_version=v0.18.1
+trigger_version=v0.10.0
+dashboard_version=v0.11.1
 
-docker tag gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard@sha256:e72593477e8cb09b718b9b0b38731de5b4cb7ef0c04712f7b97f51be5c5e06c7 $base_repo/tektoncd-dashboard
+#pipeline
+docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:$pipeline_version
+docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook:$pipeline_version
 
-docker push $base_repo/tektoncd-dashboard
+docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:$pipeline_version willdockerhub/tektoncd-pipeline-controller:$pipeline_version
+docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/webhook:$pipeline_version willdockerhub/tektoncd-pipeline-webhook:$pipeline_version
+
+docker push willdockerhub/tektoncd-pipeline-controller:$pipeline_version
+docker push willdockerhub/tektoncd-pipeline-webhook:$pipeline_version
+
+#triggers
+docker pull gcr.io/tekton-releases/github.com/tektoncd/triggers/cmd/controller:$trigger_version
+docker pull gcr.io/tekton-releases/github.com/tektoncd/triggers/cmd/webhook:$trigger_version
+
+docker tag gcr.io/tekton-releases/github.com/tektoncd/triggers/cmd/controller:$trigger_version willdockerhub/tektoncd-triggers-controller:$trigger_version
+docker tag gcr.io/tekton-releases/github.com/tektoncd/triggers/cmd/webhook:$trigger_version  willdockerhub/tektoncd-triggers-webhook:$trigger_version
+
+docker push willdockerhub/tektoncd-triggers-controller:$trigger_version
+docker push willdockerhub/tektoncd-triggers-webhook:$trigger_version
+
+#dashboard
+docker pull gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard:$dashboard_version
+docker tag gcr.io/tekton-releases/github.com/tektoncd/dashboard/cmd/dashboard:$dashboard_version willdockerhub/tektoncd-dashboard:$dashboard_version
+docker push willdockerhub/tektoncd-dashboard:$dashboard_version
+
