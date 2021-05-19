@@ -14,10 +14,10 @@ services: docker
 
 env:
   global:
-    - DOCKERHUB_USERNAME=willdockerhub
-    - ALI_USERNAME=willzhmic@outlook.com
-    - ALI_REGISTRY_URL=registry.cn-shenzhen.aliyuncs.com
-    - ALI_REGISTRY_NAMESPACE=images_mirror
+    - DOCKERHUB_USERNAME=shanbian
+    - ALI_USERNAME=guaiguaizhanhao
+    - ALI_REGISTRY_URL=registry.cn-hangzhou.aliyuncs.com
+    - ALI_REGISTRY_NAMESPACE=googleimges/googleimges
 
 before_script:
   - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
@@ -37,7 +37,7 @@ script:
       docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
       
       # push to dockerhub
-      docker push $DOCKERHUB_USERNAME/$image_name
+      #docker push $DOCKERHUB_USERNAME/$image_name
       
       # push to aliyun registry
       docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
