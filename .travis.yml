@@ -17,7 +17,7 @@ env:
     - DOCKERHUB_USERNAME=shanbian
     - ALI_USERNAME=guaiguaizhanhao
     - ALI_REGISTRY_URL=registry.cn-hangzhou.aliyuncs.com
-    - ALI_REGISTRY_NAMESPACE=googleimges/googleimges
+    - ALI_REGISTRY_NAMESPACE=googleimges
 
 before_script:
   - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
