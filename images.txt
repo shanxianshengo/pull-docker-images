@@ -1,8 +1,2 @@
-k8s.gcr.io/descheduler/descheduler:v0.20.0
-k8s.gcr.io/descheduler/descheduler:v0.19.0
-k8s.gcr.io/descheduler/descheduler:v0.18.0
-k8s.gcr.io/descheduler/descheduler:v0.17.0
-
-
-
-
+k8s.gcr.io/ingress-nginx/controller:v0.34.1
+k8s.gcr.io/defaultbackend-amd64:1.5
