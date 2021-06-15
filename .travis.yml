@@ -44,6 +44,7 @@ script:
       
       # push to aliyun registry
       docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+      echo $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
       ((icount++))
     done
 
