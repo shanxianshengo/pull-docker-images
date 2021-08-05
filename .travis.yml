@@ -18,6 +18,7 @@ services: docker
 env:
   global:
     - DOCKERHUB_USERNAME=shanbian
+    - DOCKERHUB_REGISTRY_NAMESPACE=googleimges
     - ALI_USERNAME=guaiguaizhanhao
     - ALI_REGISTRY_URL=registry.cn-hangzhou.aliyuncs.com
     - ALI_REGISTRY_NAMESPACE=googleimges
@@ -36,11 +37,12 @@ script:
       echo [$icount/$count]: $image
       image_name=${image##*/}
       docker pull $image
-      docker tag $image $DOCKERHUB_USERNAME/$image_name
+      docker tag $image $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
       docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
       
       # push to dockerhub
-      #docker push $DOCKERHUB_USERNAME/$image_name
+      docker push $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
+      echo $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
       
       # push to aliyun registry
       docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
