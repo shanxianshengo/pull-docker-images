@@ -6,7 +6,7 @@ git push -u origin master
 
 echo "travis-ci.com: "
 echo "  https://travis-ci.com/github/shanxianshengo/pull-docker-images"
-
+echo ""
 echo "当前镜像列表: "
 echo "docker hub: "
 cat images.txt |sed 's,\(.*\)/\(.*\),docker.io/shanbian/googleimges-\2,g'
