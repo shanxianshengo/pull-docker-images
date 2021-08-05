@@ -1,0 +1,55 @@
+# This workflow will pull docker images from gcr.io quay.io and push it to dockerhub or aliyun registry.
+#
+# To configure this workflow:
+#
+# 1. Set up env-->global variables as your own: 
+#
+# 2. Change the values for the DOCKERHUB_PASSWORD、ALI_PASSWORD environment variables in travis-ci.com:
+#    choose "more options-->settings-->Environment Variables"
+
+os: linux
+dist: bionic
+language: shell
+services: docker
+
+#deploy:
+#  github-token: $GITHUB_TOKEN # github 上的token环境变量
+  
+env:
+  global:
+    - DOCKERHUB_USERNAME=shanbian
+    - DOCKERHUB_REGISTRY_NAMESPACE=googleimges
+    - ALI_USERNAME=guaiguaizhanhao
+    - ALI_REGISTRY_URL=registry.cn-hangzhou.aliyuncs.com
+    - ALI_REGISTRY_NAMESPACE=googleimges
+
+before_script:
+  - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  - echo "$ALI_PASSWORD" | docker login "$ALI_REGISTRY_URL" -u "$ALI_USERNAME" --password-stdin
+ 
+script:
+  - |
+    echo "start pull retag and push"
+    count=$(cat images.txt | wc -l)
+    icount=1
+    for image in `cat images.txt`
+    do
+      echo [$icount/$count]: $image
+      image_name=${image##*/}
+      docker pull $image
+      docker tag $image $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
+      docker tag $image $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+      
+      # push to dockerhub
+      docker push $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
+      echo $DOCKERHUB_USERNAME/$DOCKERHUB_REGISTRY_NAMESPACE-$image_name
+      
+      # push to aliyun registry
+      docker push $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+      echo $ALI_REGISTRY_URL/$ALI_REGISTRY_NAMESPACE/$image_name
+      ((icount++))
+    done
+
+after_script:
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $ALI_REGISTRY_URL
+  - docker images --format "{{.Repository}}:{{.Tag}}" | grep $DOCKERHUB_USERNAME
