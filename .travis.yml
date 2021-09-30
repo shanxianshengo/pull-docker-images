@@ -8,7 +8,7 @@
 #    choose "more options-->settings-->Environment Variables"
 
 # https://docs.travis-ci.com/user/reference/overview/#linux-travisyml-examples
-arch: arm64
+#arch: arm64
 os: linux
 dist: bionic
 language: shell
